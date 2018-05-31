@@ -1,4 +1,4 @@
-#version: 0.1 
+#version: 0.2# 
 
 options:
 	main_color: &8 
@@ -8,10 +8,19 @@ options:
 
 #main_core 
 function checkSkriptVersion():
-	send "Sprawdzanie wersji oprogramowania..." to console 
+	send "Sprawdzanie wersji oprogramowania..." to console
+	set {_version} to content of file "plugins/Skript/scripts/%skript%.sk"
+	set {_v} to index of "##" in {_version}
+	set {_v2} to subtext of {_version} from character ({_v}+1) to character (length of {_version})
+	set {_v3} to index of "##" in {_v2} 
+	set {version} to subtext of {_version} from character ({_v}+1) to character ({_v3})
+	set {_version} to result of connect to "https://raw.githubusercontent.com/mlodydeziom/free-core/master/core.sk"
+	set {version.new} to subtext of {_version} from character ({_v}+1) to character ({_v3})
+	{version} is not {version.new}:
+		download "https://raw.githubusercontent.com/mlodydeziom/free-core/master/core.sk" to "plugins/Skript/scripts/%skript%.sk"
+		send "Pobrano nową wersje oprogramowania %{version.new}%" 
 	
 on load: 
 	checkSkriptVersion() 
-	#do zrobienia
-	send "&aWersja jest aktualna..." to console 
+
 	
