@@ -1,0 +1,17 @@
+#version: 0.1 
+
+options:
+	main_color: &8 
+	second_color: &c
+	sk_tag: &cFREE-CORE
+	s_tag: nazwa_serwer
+
+#main_core 
+function checkSkriptVersion():
+	send "Sprawdzanie wersji oprogramowania..." to console 
+	
+on load: 
+	checkSkriptVersion() 
+	#do zrobienia
+	send "&aWersja jest aktualna..." to console 
+	
